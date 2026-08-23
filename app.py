@@ -39,3 +39,12 @@ if prompt := st.chat_input("Gemini'a bir sey sor..."):
             st.session_state.messages.append({"role": "assistant", "content": response.text})
         except Exception as e:
             st.error(f"Hata olustu: {e}")
+
+
+# (Kodun geri kalanı...)
+
+# Kullanıcıdan Girdi Al ve Yanıtla kısmı bittikten sonra en alta:
+
+if st.button("🗑️ Sohbeti Temizle"):
+    st.session_state.messages = []
+    st.rerun()
