@@ -4,9 +4,15 @@ from google import genai
 st.set_page_config(page_title="Benim Gemini AI Sitem", page_icon="🤖")
 st.title("🤖 Benim Gemini AI Asistanım")
 
-# Sol menuden API Key alalim
-with st.sidebar:
-    api_key = st.text_input("Google AI Studio API Key Girin:", type="password")
+# Arka planda gizli anahtarı otomatik kullan
+try:
+    api_key = st.secrets["GEMINI_API_KEY"]
+except:
+    api_key = None
+
+if not api_key:
+    st.error("⚠️ API Key bulunamadı! Lütfen Streamlit Secrets ayarlarına ekleyin.")
+    st.stop()
 
 # Sohbet gecmisi hafizasi
 if "messages" not in st.session_state:
